@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
 import junit.framework.Assert;
@@ -15,7 +16,7 @@ public class IntBoardTest {
 	public void setUp(){
 		board = new IntBoard();
 	}
-	
+	//getAdjList tests
 	@Test
 	public void testAdj00(){
 		BoardCell cell = board.getCell(0, 0);
@@ -71,5 +72,13 @@ public class IntBoardTest {
 		Assert.assertTrue(testList.contains(board.getCell(3,1)));
 		Assert.assertEquals(2,testList.size());
 	}
-	
+	//getTargets tests
+	@Test
+	public void testTargets0(){
+		BoardCell cell = board.getCell(0, 0);
+		HashSet targets = board.getTargets(cell,1);
+		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
+		Assert.assertEquals(2, targets.size());
+	}
 }

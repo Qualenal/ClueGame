@@ -15,7 +15,7 @@ public class IntBoard {
 	}
 	
 	// "Getters"
-	public HashSet<BoardCell> getTargets(){
+	public HashSet<BoardCell> getTargets(BoardCell initialCell, int moves){
 		return new HashSet<BoardCell>();
 	}
 	public LinkedList<BoardCell> getAdjList(){

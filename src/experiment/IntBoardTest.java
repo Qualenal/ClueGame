@@ -1,3 +1,4 @@
+package experiment;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -115,6 +116,7 @@ public class IntBoardTest {
 		Assert.assertTrue(targets.contains(board.getCell(3,0)));
 		Assert.assertEquals(4, targets.size());
 	}
+	@Test
 	public void testTargets5(){
 		BoardCell cell = board.getCell(1, 1);
 		HashSet targets = board.getTargets(cell,2);

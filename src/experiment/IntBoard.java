@@ -12,14 +12,18 @@ public class IntBoard {
 	
 	//Constructor
 	public IntBoard() {
-		
+		for(int i = 0; i < NUM_ROWS; i++){
+			for(int j = 0; j < NUM_COLS; j++){
+				board[i][j] = new BoardCell(i,j);
+			}
+		}
 	}
 	
 	// "Getters"
 	public HashSet<BoardCell> getTargets(BoardCell initialCell, int moves){
 		return new HashSet<BoardCell>();
 	}
-	public LinkedList<BoardCell> getAdjList(){
+	public LinkedList<BoardCell> getAdjList(BoardCell cell){
 		return new LinkedList<BoardCell>();
 	}
 	public BoardCell getCell(int row, int col){
@@ -28,7 +32,12 @@ public class IntBoard {
 	
 	//Target-Finding Algorithm
 	public void calcAdjacencies(){
-		
+		adjList = new HashMap<BoardCell,LinkedList<BoardCell>>();
+		for(int i = 0; i < NUM_ROWS; i++){
+			for(int j = 0; j < NUM_COLS; j++){
+				
+			}
+		}
 	}
 	public void calcTargets(BoardCell initialCell, int moves){
 		

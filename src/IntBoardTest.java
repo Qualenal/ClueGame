@@ -100,30 +100,30 @@ public class IntBoardTest {
 	public void testTargets3(){
 		BoardCell cell = board.getCell(0, 0);
 		HashSet targets = board.getTargets(cell,2);
-		Assert.asserTrue(targets.contains(board.getCell(0,2)));
-		Assert.asserTrue(targets.contains(board.getCell(1,1)));
-		Assert.asserTrue(targets.contains(board.getCell(2,0)));
+		Assert.assertTrue(targets.contains(board.getCell(0,2)));
+		Assert.assertTrue(targets.contains(board.getCell(1,1)));
+		Assert.assertTrue(targets.contains(board.getCell(2,0)));
 		Assert.assertEquals(3, targets.size());
 	}
 	@Test
 	public void testTargets4(){
 		BoardCell cell = board.getCell(0, 0);
 		HashSet targets = board.getTargets(cell,3);
-		Assert.asserTrue(targets.contains(board.getCell(0,3)));
-		Assert.asserTrue(targets.contains(board.getCell(1,2)));
-		Assert.asserTrue(targets.contains(board.getCell(2,1)));
-		Assert.asserTrue(targets.contains(board.getCell(3,0)));
+		Assert.assertTrue(targets.contains(board.getCell(0,3)));
+		Assert.assertTrue(targets.contains(board.getCell(1,2)));
+		Assert.assertTrue(targets.contains(board.getCell(2,1)));
+		Assert.assertTrue(targets.contains(board.getCell(3,0)));
 		Assert.assertEquals(4, targets.size());
 	}
-	public void testTargets4(){
+	public void testTargets5(){
 		BoardCell cell = board.getCell(1, 1);
 		HashSet targets = board.getTargets(cell,2);
-		Assert.asserTrue(targets.contains(board.getCell(0,0)));
-		Assert.asserTrue(targets.contains(board.getCell(0,2)));
-		Assert.asserTrue(targets.contains(board.getCell(2,0)));
-		Assert.asserTrue(targets.contains(board.getCell(3,1)));
-		Assert.asserTrue(targets.contains(board.getCell(1,3)));
-		Assert.asserTrue(targets.contains(board.getCell(2,2)));
+		Assert.assertTrue(targets.contains(board.getCell(0,0)));
+		Assert.assertTrue(targets.contains(board.getCell(0,2)));
+		Assert.assertTrue(targets.contains(board.getCell(2,0)));
+		Assert.assertTrue(targets.contains(board.getCell(3,1)));
+		Assert.assertTrue(targets.contains(board.getCell(1,3)));
+		Assert.assertTrue(targets.contains(board.getCell(2,2)));
 		Assert.assertEquals(6, targets.size());
 	}
 }

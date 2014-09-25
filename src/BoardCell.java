@@ -7,5 +7,4 @@ public class BoardCell {
 		this.row = row;
 		this.col = col;
 	}
-	
 }

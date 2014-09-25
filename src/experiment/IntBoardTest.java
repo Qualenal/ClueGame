@@ -75,7 +75,8 @@ public class IntBoardTest {
 	@Test
 	public void testTargets0(){
 		BoardCell cell = board.getCell(0, 0);
-		HashSet targets = board.getTargets(cell,1);
+		board.calcTargets(cell, 1);
+		HashSet<BoardCell> targets = board.getTargets();
 		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
 		Assert.assertEquals(2, targets.size());
@@ -83,7 +84,8 @@ public class IntBoardTest {
 	@Test
 	public void testTargets1(){
 		BoardCell cell = board.getCell(3, 3);
-		HashSet targets = board.getTargets(cell,1);
+		board.calcTargets(cell, 1);
+		HashSet<BoardCell> targets = board.getTargets();
 		Assert.assertTrue(targets.contains(board.getCell(2, 3)));
 		Assert.assertTrue(targets.contains(board.getCell(3, 2)));
 		Assert.assertEquals(2, targets.size());
@@ -91,7 +93,8 @@ public class IntBoardTest {
 	@Test
 	public void testTargets2(){
 		BoardCell cell = board.getCell(1, 1);
-		HashSet targets = board.getTargets(cell,1);
+		board.calcTargets(cell, 1);
+		HashSet<BoardCell> targets = board.getTargets();
 		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
@@ -101,7 +104,8 @@ public class IntBoardTest {
 	@Test
 	public void testTargets3(){
 		BoardCell cell = board.getCell(0, 0);
-		HashSet targets = board.getTargets(cell,2);
+		board.calcTargets(cell, 2);
+		HashSet<BoardCell> targets = board.getTargets();
 		Assert.assertTrue(targets.contains(board.getCell(0,2)));
 		Assert.assertTrue(targets.contains(board.getCell(1,1)));
 		Assert.assertTrue(targets.contains(board.getCell(2,0)));
@@ -110,17 +114,21 @@ public class IntBoardTest {
 	@Test
 	public void testTargets4(){
 		BoardCell cell = board.getCell(0, 0);
-		HashSet targets = board.getTargets(cell,3);
+		board.calcTargets(cell, 3);
+		HashSet<BoardCell> targets = board.getTargets();
 		Assert.assertTrue(targets.contains(board.getCell(0,3)));
 		Assert.assertTrue(targets.contains(board.getCell(1,2)));
 		Assert.assertTrue(targets.contains(board.getCell(2,1)));
 		Assert.assertTrue(targets.contains(board.getCell(3,0)));
-		Assert.assertEquals(4, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(0,1)));
+		Assert.assertTrue(targets.contains(board.getCell(1,0)));
+		Assert.assertEquals(6, targets.size());
 	}
 	@Test
 	public void testTargets5(){
 		BoardCell cell = board.getCell(1, 1);
-		HashSet targets = board.getTargets(cell,2);
+		board.calcTargets(cell, 2);
+		HashSet<BoardCell> targets = board.getTargets();
 		Assert.assertTrue(targets.contains(board.getCell(0,0)));
 		Assert.assertTrue(targets.contains(board.getCell(0,2)));
 		Assert.assertTrue(targets.contains(board.getCell(2,0)));

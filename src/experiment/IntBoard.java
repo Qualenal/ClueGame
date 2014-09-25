@@ -12,6 +12,7 @@ public class IntBoard {
 	
 	//Constructor
 	public IntBoard() {
+		board = new BoardCell[NUM_ROWS][NUM_COLS];
 		for(int i = 0; i < NUM_ROWS; i++){
 			for(int j = 0; j < NUM_COLS; j++){
 				board[i][j] = new BoardCell(i,j);
@@ -24,7 +25,7 @@ public class IntBoard {
 		return new HashSet<BoardCell>();
 	}
 	public LinkedList<BoardCell> getAdjList(BoardCell cell){
-		return new LinkedList<BoardCell>();
+		return adjList.get(cell);
 	}
 	public BoardCell getCell(int row, int col){
 		return board[row][col];
@@ -35,7 +36,17 @@ public class IntBoard {
 		adjList = new HashMap<BoardCell,LinkedList<BoardCell>>();
 		for(int i = 0; i < NUM_ROWS; i++){
 			for(int j = 0; j < NUM_COLS; j++){
-				
+				//Add the current cell to the Map and add the LinkedList
+				adjList.put(board[i][j], new LinkedList<BoardCell>());
+				//Four possible cases for each cell
+				if(i-1 > -1)
+					adjList.get(board[i][j]).add(board[i-1][j]);
+				if(j-1 > -1)
+					adjList.get(board[i][j]).add(board[i][j-1]);
+				if(i+1 < NUM_ROWS)
+					adjList.get(board[i][j]).add(board[i+1][j]);
+				if(j+1 < NUM_COLS)
+					adjList.get(board[i][j]).add(board[i][j+1]);
 			}
 		}
 	}

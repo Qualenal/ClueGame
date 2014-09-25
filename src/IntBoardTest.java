@@ -17,7 +17,7 @@ public class IntBoardTest {
 	}
 	
 	@Test
-	public void testAdj0(){
+	public void testAdj00(){
 		BoardCell cell = board.getCell(0, 0);
 		LinkedList<BoardCell> testList = board.getAdjList();
 		Assert.assertTrue(testList.contains(board.getCell(1,0)));
@@ -26,7 +26,7 @@ public class IntBoardTest {
 	}
 	
 	@Test
-	public void testAdj1(){
+	public void testAdj11(){
 		BoardCell cell = board.getCell(1, 1);
 		LinkedList<BoardCell> testList = board.getAdjList();
 		Assert.assertTrue(testList.contains(board.getCell(1,0)));
@@ -35,4 +35,41 @@ public class IntBoardTest {
 		Assert.assertTrue(testList.contains(board.getCell(1,2)));
 		Assert.assertEquals(4,testList.size());
 	}
+	
+	@Test
+	public void testAdj22(){
+		BoardCell cell = board.getCell(2, 2);
+		LinkedList<BoardCell> testList = board.getAdjList();
+		Assert.assertTrue(testList.contains(board.getCell(1,2)));
+		Assert.assertTrue(testList.contains(board.getCell(2,1)));
+		Assert.assertTrue(testList.contains(board.getCell(2,3)));
+		Assert.assertTrue(testList.contains(board.getCell(3,2)));
+		Assert.assertEquals(4,testList.size());
+	}
+	
+	@Test
+	public void testAdj03(){
+		BoardCell cell = board.getCell(0, 3);
+		LinkedList<BoardCell> testList = board.getAdjList();
+		Assert.assertTrue(testList.contains(board.getCell(0,2)));
+		Assert.assertTrue(testList.contains(board.getCell(1,3)));
+		Assert.assertEquals(2,testList.size());
+	}
+	@Test
+	public void testAdj33(){
+		BoardCell cell = board.getCell(3, 3);
+		LinkedList<BoardCell> testList = board.getAdjList();
+		Assert.assertTrue(testList.contains(board.getCell(2,3)));
+		Assert.assertTrue(testList.contains(board.getCell(3,2)));
+		Assert.assertEquals(2,testList.size());
+	}
+	@Test
+	public void testAdj30(){
+		BoardCell cell = board.getCell(3, 0);
+		LinkedList<BoardCell> testList = board.getAdjList();
+		Assert.assertTrue(testList.contains(board.getCell(2,0)));
+		Assert.assertTrue(testList.contains(board.getCell(3,1)));
+		Assert.assertEquals(2,testList.size());
+	}
+	
 }

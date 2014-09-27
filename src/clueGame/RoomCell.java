@@ -13,5 +13,4 @@ public class RoomCell extends BoardCell {
 	public DoorDirection getDir(){
 		return doorDirection;
 	}
-	
 }

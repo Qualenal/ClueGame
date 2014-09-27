@@ -12,7 +12,6 @@ public class Board {
 	public void loadBoardConfig(){
 		
 	}
-	
 	public int getRows(){
 		return numRows;
 	}

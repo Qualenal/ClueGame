@@ -4,15 +4,20 @@ import java.util.Map;
 
 public class ClueGame {
 	private Map<Character,String> rooms;
-	Board board = new Board();
+	private Board board;
 	
-	public ClueGame(String Map, String Legend){
+	public ClueGame(String map, String legend){
 		
-	}
-	public void loadConfigFiles(){
 	}
 	
 	public Board getBoard(){
 		return board;
+	}
+	
+	public void loadConfigFiles(){
+		
+	}
+	public void loadRoomFiles(){
+		
 	}
 }

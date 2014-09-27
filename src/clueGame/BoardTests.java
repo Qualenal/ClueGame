@@ -13,20 +13,18 @@ import clueGame.RoomCell.DoorDirection;
 
 public class BoardTests {
 	Board board;
-	int NUM_ROOMS;
 	
 	@Before
 	public void setUp(){
 		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
 		game.loadConfigFiles();
 		board = game.getBoard();
-		NUM_ROOMS = 9;
 	}
 	
 	@Test
 	public void checkRooms(){
 		Map<Character, String> rooms = board.getRooms();
-		Assert.assertEquals(NUM_ROOMS, rooms.size());
+		Assert.assertEquals(9, rooms.size());
 		Assert.assertEquals("Dungeon", rooms.get('D'));
 		Assert.assertEquals("Bedroom", rooms.get('B'));
 		Assert.assertEquals("Workshop", rooms.get('R'));
@@ -74,10 +72,14 @@ public class BoardTests {
 	@Test (expected = BadConfigFormatException.class)
 	public void checkLayoutExceptions(){
 		ClueGame badGame = new ClueGame("BadLayout.csv", "ClueLegend.txt");
+		badGame.loadRoomFiles();
+		badGame.getBoard().loadBoardConfig();
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void checkLegendExceptions(){
 		ClueGame badGame = new ClueGame("ClueLayout.csv", "BadLegend.txt");
+		badGame.loadRoomFiles();
+		badGame.getBoard().loadBoardConfig();
 	}
 }

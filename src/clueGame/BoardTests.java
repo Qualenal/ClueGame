@@ -41,45 +41,45 @@ public class BoardTests {
 	
 	@Test
 	public void checkDimensions(){
-		Assert.assertEquals(board.getRows(), 20);
-		Assert.assertEquals(board.getColumns(), 21);
+		Assert.assertEquals(board.getNumRows(), 20);
+		Assert.assertEquals(board.getNumColumns(), 21);
 	}
 	
 	@Test
 	public void doorCheck(){
-		Assert.assertTrue(board.getCell(2,4).isDoorway());
-		Assert.assertTrue(board.getCell(10,4).isDoorway());
-		Assert.assertTrue(board.getCell(17,3).isDoorway());
-		Assert.assertTrue(board.getCell(5,9).isDoorway());
-		Assert.assertFalse(board.getCell(6,6).isDoorway());
-		Assert.assertEquals(board.getRoomCell(2, 4).getDir(), DoorDirection.RIGHT);
-		Assert.assertEquals(board.getRoomCell(10, 4).getDir(), DoorDirection.RIGHT);
-		Assert.assertEquals(board.getRoomCell(17, 3).getDir(), DoorDirection.UP);
-		Assert.assertEquals(board.getRoomCell(5, 9).getDir(), DoorDirection.RIGHT);
+		Assert.assertTrue(board.getCellAt(2,4).isDoorway());
+		Assert.assertTrue(board.getCellAt(10,4).isDoorway());
+		Assert.assertTrue(board.getCellAt(17,3).isDoorway());
+		Assert.assertTrue(board.getCellAt(5,9).isDoorway());
+		Assert.assertFalse(board.getCellAt(6,6).isDoorway());
+		Assert.assertEquals(board.getRoomCellAt(2, 4).getDoorDirection(), DoorDirection.RIGHT);
+		Assert.assertEquals(board.getRoomCellAt(10, 4).getDoorDirection(), DoorDirection.RIGHT);
+		Assert.assertEquals(board.getRoomCellAt(17, 3).getDoorDirection(), DoorDirection.UP);
+		Assert.assertEquals(board.getRoomCellAt(5, 9).getDoorDirection(), DoorDirection.RIGHT);
 	}
 	
 	@Test
 	public void numDoorCheck(){
 		int numDoors = 0;
-		for(int i = 0; i < board.getRows(); i++){
-			for(int j = 0; j < board.getColumns(); j++){
-				if(board.getCell(i, j).isDoorway())
+		for(int i = 0; i < board.getNumRows(); i++){
+			for(int j = 0; j < board.getNumColumns(); j++){
+				if(board.getCellAt(i, j).isDoorway())
 					numDoors++;
 			}}
 		Assert.assertEquals(numDoors, 16);
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
-	public void checkLayoutExceptions(){
+	public void checkLayoutExceptions() throws BadConfigFormatException, FileNotFoundException{
 		ClueGame badGame = new ClueGame("BadLayout.csv", "ClueLegend.txt");
-		badGame.loadRoomFiles();
-		badGame.getBoard().loadBoardConfig();
+		badGame.loadRoomConfig();
+		badGame.getBoard().loadBoardConfig("BadLayout.csv");
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
-	public void checkLegendExceptions(){
+	public void checkLegendExceptions() throws BadConfigFormatException, FileNotFoundException{
 		ClueGame badGame = new ClueGame("ClueLayout.csv", "BadLegend.txt");
-		badGame.loadRoomFiles();
-		badGame.getBoard().loadBoardConfig();
+		badGame.loadRoomConfig();
+		badGame.getBoard().loadBoardConfig("ClueLayout.csv");
 	}
 }

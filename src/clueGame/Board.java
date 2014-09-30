@@ -75,6 +75,10 @@ public class Board {
 		return new LinkedList<BoardCell>();
 	}
 	
+	public LinkedList<BoardCell> getTargets(int row, int col, int dist){
+		return new LinkedList<BoardCell>();
+	}
+	
 
 	// Setters
 	public void setRooms(Map<Character, String> rooms) {

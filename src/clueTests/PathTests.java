@@ -106,10 +106,43 @@ public class PathTests {
 		Assert.assertTrue(adj.contains(board.getCellAt(6, 11)));
 	}
 	
-	
-	
-	
-	
-	
+	//These tests are designated by dark blue 
+	public void walkwayTests(){
+		LinkedList<BoardCell> adj = board.getTargets(11, 11, 1);
+		Assert.assertTrue(adj.contains(board.getCellAt(10, 11)));
+		Assert.assertTrue(adj.contains(board.getCellAt(12, 11)));
+		Assert.assertTrue(adj.contains(board.getCellAt(11, 10)));
+		
+		adj = board.getTargets(16, 22, 3);
+		Assert.assertTrue(adj.contains(board.getCellAt(16, 19)));
+		Assert.assertTrue(adj.contains(board.getCellAt(19, 22)));
+		
+		adj = board.getTargets(0, 16, 2);
+		Assert.assertTrue(adj.contains(board.getCellAt(1, 15)));
+		Assert.assertTrue(adj.contains(board.getCellAt(2, 16)));
 
+		adj = board.getTargets(19, 0, 6);
+		Assert.assertTrue(adj.contains(board.getCellAt(16, 3)));
+	}
+	
+	//The first 2 are entry test and are designated by light green
+	//The last 2 are exit tests and are designated by black with white text
+	public void entryAndExitTests(){
+		LinkedList<BoardCell> adj = board.getTargets(5, 16, 2);
+		Assert.assertTrue(adj.contains(board.getCellAt(4, 17)));
+		
+		adj = board.getTargets(16, 13, 2);
+		Assert.assertTrue(adj.contains(board.getCellAt(17, 12)));
+		Assert.assertTrue(adj.contains(board.getCellAt(17, 14)));
+		Assert.assertTrue(adj.contains(board.getCellAt(18, 13)));
+
+		adj = board.getTargets(14, 22, 3);
+		Assert.assertTrue(adj.contains(board.getCellAt(14, 19)));
+		
+		adj = board.getTargets(19, 4, 4);
+		Assert.assertTrue(adj.contains(board.getCellAt(16, 3)));
+		Assert.assertTrue(adj.contains(board.getCellAt(21, 6)));
+		Assert.assertTrue(adj.contains(board.getCellAt(20, 5)));
+		
+	}
 }

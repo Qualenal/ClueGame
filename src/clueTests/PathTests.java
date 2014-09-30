@@ -16,6 +16,7 @@ public class PathTests {
 		ClueGame game = new ClueGame("ClueLayoutStudents.csv", "roomConfig.txt");
 		game.loadConfigFiles();
 		board = game.getBoard();
+		board.calcAdjacencies();
 	}
 	
 	//This test is designated as a light blue

@@ -37,17 +37,24 @@ public class ClueGame {
 		while(fileIn.hasNextLine()){
 			String newLine = fileIn.nextLine();
 			String[] parts = newLine.split(",");
+			
 			// Should have 2 parts per line
-			if(parts.length != 2)
+			if(parts.length != 2){
+				fileIn.close();
 				throw new BadConfigFormatException("Room config has too many arguments on one line!");
+			}
+				
 			// Make sure first part is a char
 			if(parts[0].length() != 1){
+				fileIn.close();
 				throw new BadConfigFormatException("Room initial is not 1 letter!");
 			}
+			
 			// Remove spaces from parts[1]
 			parts[1] = parts[1].trim();
 			this.rooms.put(parts[0].charAt(0), parts[1]);
 		}
 		board.setRooms(rooms);
+		fileIn.close();
 	}
 }

@@ -16,7 +16,7 @@ public class BoardTests {
 	
 	@Before
 	public void setUp(){
-		ClueGame game = new ClueGame("ClueLayout.csv", "ClueLegend.txt");
+		ClueGame game = new ClueGame("ClueLayoutStudents.csv", "roomConfig.txt");
 		game.loadConfigFiles();
 		board = game.getBoard();
 	}
@@ -24,7 +24,7 @@ public class BoardTests {
 	@Test
 	public void checkRooms(){
 		Map<Character, String> rooms = board.getRooms();
-		Assert.assertEquals(9, rooms.size());
+		Assert.assertEquals(11, rooms.size());
 		Assert.assertEquals("Dungeon", rooms.get('D'));
 		Assert.assertEquals("Bedroom", rooms.get('B'));
 		Assert.assertEquals("Workshop", rooms.get('R'));
@@ -41,8 +41,8 @@ public class BoardTests {
 	
 	@Test
 	public void checkDimensions(){
-		Assert.assertEquals(board.getNumRows(), 20);
-		Assert.assertEquals(board.getNumColumns(), 21);
+		Assert.assertEquals(board.getNumRows(), 22);
+		Assert.assertEquals(board.getNumColumns(), 23);
 	}
 	
 	@Test
@@ -71,14 +71,14 @@ public class BoardTests {
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void checkLayoutExceptions() throws BadConfigFormatException, FileNotFoundException{
-		ClueGame badGame = new ClueGame("BadLayout.csv", "ClueLegend.txt");
+		ClueGame badGame = new ClueGame("ClueLayoutBadColumns.csv", "ClueLegend.txt");
 		badGame.loadRoomConfig();
-		badGame.getBoard().loadBoardConfig("BadLayout.csv");
+		badGame.getBoard().loadBoardConfig("ClueLayoutBadColumns.csv");
 	}
 	
 	@Test (expected = BadConfigFormatException.class)
 	public void checkLegendExceptions() throws BadConfigFormatException, FileNotFoundException{
-		ClueGame badGame = new ClueGame("ClueLayout.csv", "BadLegend.txt");
+		ClueGame badGame = new ClueGame("ClueLayout.csv", "ClueLegendBadFormat.txt");
 		badGame.loadRoomConfig();
 		badGame.getBoard().loadBoardConfig("ClueLayout.csv");
 	}

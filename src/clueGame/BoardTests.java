@@ -1,14 +1,12 @@
 package clueGame;
 
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
-
-import clueGame.*;
 import clueGame.RoomCell.DoorDirection;
 
 public class BoardTests {

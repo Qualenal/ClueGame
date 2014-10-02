@@ -138,19 +138,18 @@ public class PathTests {
 		
 		board.calcTargets(16, 13, 2);
 		adj = board.getTargets();
-		Assert.assertTrue(adj.contains(board.getCellAt(17, 12)));
+		Assert.assertTrue(adj.contains(board.getCellAt(17, 13)));
 		Assert.assertTrue(adj.contains(board.getCellAt(17, 14)));
-		Assert.assertTrue(adj.contains(board.getCellAt(18, 13)));
-
+		Assert.assertTrue(adj.contains(board.getCellAt(16, 15)));
+		Assert.assertTrue(adj.contains(board.getCellAt(16, 11)));
+		
 		board.calcTargets(14, 22, 3);
 		adj = board.getTargets();
-		Assert.assertTrue(adj.contains(board.getCellAt(14, 19)));
+		Assert.assertTrue(adj.isEmpty());
 		
 		board.calcTargets(19, 4, 4);
 		adj = board.getTargets();
-		Assert.assertTrue(adj.contains(board.getCellAt(16, 3)));
-		Assert.assertTrue(adj.contains(board.getCellAt(21, 6)));
-		Assert.assertTrue(adj.contains(board.getCellAt(20, 5)));
+		Assert.assertTrue(adj.isEmpty());
 		
 	}
 }

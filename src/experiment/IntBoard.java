@@ -57,6 +57,7 @@ public class IntBoard {
 		visited.add(initialCell);
 		findAllTargets(initialCell, moves);
 	}
+	
 	public void findAllTargets(BoardCell cell, int moves){
 		LinkedList<BoardCell> adjCells = nonVisitedAdjCells(cell);
 		for(BoardCell c : adjCells){

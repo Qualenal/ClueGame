@@ -27,7 +27,7 @@ public class ClueGame {
 			board.loadBoardConfig(mapFile);
 		} catch(Exception e){
 			System.err.println(e.getLocalizedMessage());
-			System.exit(0);
+			//System.exit(0);
 		}
 	}
 	public void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException{

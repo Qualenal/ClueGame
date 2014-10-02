@@ -3,9 +3,11 @@ package clueGame;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import clueGame.RoomCell.DoorDirection;
 
@@ -16,6 +18,7 @@ public class Board {
 	private int numColumns;
 	private BoardCell[][] board;
 	Map<Character, String> rooms;
+	Set<BoardCell> targetList;
 	Map<BoardCell,LinkedList<BoardCell>> adjList;
 
 	public void loadBoardConfig(String mapFile) throws FileNotFoundException,
@@ -47,8 +50,9 @@ public class Board {
 					fileIn.close();
 					throw new BadConfigFormatException("Bad room initial");
 				}
-				if (parts[i] == "W")
+				if (parts[i].equals("W")){
 					board[numRows][i] = new WalkwayCell(numRows, i);
+				}
 				else
 					board[numRows][i] = new RoomCell(numRows, i, parts[i]);
 			}
@@ -61,8 +65,8 @@ public class Board {
 	public void calcAdjacencies(){
 		adjList = new HashMap<BoardCell,LinkedList<BoardCell>>();
 		//Calculate a list for each cell on the board
-		for(int i = 0; i < numColumns; i++){
-			for(int j = 0; j < numRows; j++){
+		for(int i = 0; i < numRows; i++){
+			for(int j = 0; j < numColumns; j++){
 				BoardCell currentCell = board[i][j];
 				//Simple case, if cell is a doorway then only adj is direction of doorway
 				if(currentCell.isDoorway()){
@@ -72,40 +76,57 @@ public class Board {
 					LinkedList<BoardCell> currentAdjList = new LinkedList<BoardCell>();
 					if(currentRoomCell.getDoorDirection() == DoorDirection.DOWN)
 						currentAdjList.add(board[i+1][j]);
-					if(currentRoomCell.getDoorDirection() == DoorDirection.RIGHT)
+					else if(currentRoomCell.getDoorDirection() == DoorDirection.RIGHT)
 						currentAdjList.add(board[i][j+1]);
-					if(currentRoomCell.getDoorDirection() == DoorDirection.LEFT)
+					else if(currentRoomCell.getDoorDirection() == DoorDirection.LEFT)
 						currentAdjList.add(board[i][j-1]);
-					if(currentRoomCell.getDoorDirection() == DoorDirection.RIGHT)
+					else if(currentRoomCell.getDoorDirection() == DoorDirection.RIGHT)
 						currentAdjList.add(board[i-1][j]);
 					//Add the pair to the adjList map
 					adjList.put(currentCell, currentAdjList);
 				} else if(currentCell.isRoom()){
-					//If it's a room and not a doorway, do nothing (for now)
+					//Add an empty list
+					adjList.put(currentCell, new LinkedList<BoardCell>());
 				} else if(currentCell.isWalkway()){
 					//Create the linked list and add all directions if they are allowed moves
 					LinkedList<BoardCell> currentAdjList = new LinkedList<BoardCell>();
-					
+					if(isViableMove(i+1,j,DoorDirection.UP))
+						currentAdjList.add(board[i+1][j]);
+					if(isViableMove(i-1,j,DoorDirection.DOWN))
+						currentAdjList.add(board[i-1][j]);
+					if(isViableMove(i,j+1,DoorDirection.LEFT))
+						currentAdjList.add(board[i][j+1]);
+					if(isViableMove(i,j-1,DoorDirection.RIGHT))
+						currentAdjList.add(board[i][j-1]);
+					//Add the linked list to the map
+					adjList.put(board[i][j], currentAdjList);
 				}
 			}
 		}
 	}
-	public boolean isViableMove(BoardCell cell, DoorDirection allowedDoorDirection){
+	public boolean isViableMove(int row, int col, DoorDirection allowedDoorDirection){
 		//If the cell is out of bounds return false
-		if(cell.getRow() < 0 || cell.getRow() >= numRows)
+		if(row < 0 || row >= numRows)
 			return false;
-		if(cell.getCol() < 0 || cell.getCol() >= numColumns)
+		if(col < 0 || col >= numColumns)
 			return false;
 		//If cell is a room cell, check allowed direction
-		if(cell.isRoom()){
-			if(cell.isDoorway()){
-				RoomCell aRoomCell = (RoomCell) cell;
+		if(getCellAt(row,col).isRoom()){
+			if(getCellAt(row,col).isDoorway()){
+				RoomCell aRoomCell = (RoomCell) getCellAt(row,col);
+				if(allowedDoorDirection == aRoomCell.getDoorDirection())
+					return true;
 			}
 			//Not a doorway, return false
-			
+			return false;
 		}
+		//Must be a walkway
 		return true;
 	}
+	public Set<BoardCell> calcTargets(int row, int col, int dist){
+		return new HashSet<BoardCell>();
+	}
+	
 	// Getters
 	public int getNumRows() {
 		return numRows;
@@ -128,12 +149,14 @@ public class Board {
 	}
 
 	public LinkedList<BoardCell> getAdjList(int row, int col) {
+		if(!adjList.containsKey(board[row][col]))
+			System.out.println("Fuck");
 		return adjList.get(board[row][col]);
 	}
-	
-	public LinkedList<BoardCell> getTargets(int row, int col, int dist){
-		return new LinkedList<BoardCell>();
+	public Set<BoardCell> getTargets(){
+		return targetList;
 	}
+	
 	
 
 	// Setters

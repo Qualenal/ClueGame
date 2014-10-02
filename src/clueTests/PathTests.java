@@ -33,10 +33,9 @@ public class PathTests {
 	@Test
 	public void edgeTests(){
 		//Tests a square at each of the 4 walls
-		LinkedList<BoardCell> adj = board.getAdjList(0, 8);
-		for (int i = 0; i < adj.size(); i++) {
-			Assert.assertTrue(adj.get(i).isRoom());
-		}
+		LinkedList<BoardCell> adj = board.getAdjList(0, 6);
+		Assert.assertTrue(adj.contains(board.getCellAt(0, 5)));
+		Assert.assertTrue(adj.contains(board.getCellAt(1, 6)));
 		
 		adj = board.getAdjList(8, 22);
 		Assert.assertTrue(adj.contains(board.getCellAt(8,21)));
@@ -128,11 +127,24 @@ public class PathTests {
 		Assert.assertTrue(adj.contains(board.getCellAt(16, 3)));
 	}
 	
+	
+	@Test
+	public void roomTests(){
+		board.calcTargets(14, 22, 3);
+		Set <BoardCell> adj = board.getTargets();
+		Assert.assertTrue(adj.isEmpty());
+		
+		board.calcTargets(19, 4, 4);
+		adj = board.getTargets();
+		Assert.assertTrue(adj.isEmpty());
+		
+	}
+	
 	//The first 2 are entry test and are designated by light green
 	//The last 2 are exit tests and are designated by black with white text
 	@Test
 	public void entryAndExitTests(){
-		board.calcTargets(5,16,2);
+		board.calcTargets(5,16,3);
 		Set<BoardCell> adj = board.getTargets();
 		Assert.assertTrue(adj.contains(board.getCellAt(4, 17)));
 		
@@ -142,14 +154,5 @@ public class PathTests {
 		Assert.assertTrue(adj.contains(board.getCellAt(17, 14)));
 		Assert.assertTrue(adj.contains(board.getCellAt(16, 15)));
 		Assert.assertTrue(adj.contains(board.getCellAt(16, 11)));
-		
-		board.calcTargets(14, 22, 3);
-		adj = board.getTargets();
-		Assert.assertTrue(adj.isEmpty());
-		
-		board.calcTargets(19, 4, 4);
-		adj = board.getTargets();
-		Assert.assertTrue(adj.isEmpty());
-		
 	}
 }
